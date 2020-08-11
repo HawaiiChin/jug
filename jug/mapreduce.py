@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright (C) 2008-2018, Luis Pedro Coelho <luis@luispedro.org>
+# Copyright (C) 2008-2020, Luis Pedro Coelho <luis@luispedro.org>
 # vim: set ts=4 sts=4 sw=4 expandtab smartindent:
 # License : MIT
 
@@ -39,7 +39,7 @@ def _jug_reduce(reducer, inputs):
     reducer = _get_function(reducer)
     return reduce(reducer, chain(inputs))
 
-def _break_up(lst, step):
+def _break_up(lst, step : int):
     start = 0
     next = step
     while start < len(lst):
@@ -57,7 +57,7 @@ def _jug_map_curry(mapper, es):
     return [mapper(*e) for e in es]
 
 
-def mapreduce(reducer, mapper, inputs, map_step=4, reduce_step=8):
+def mapreduce(reducer, mapper, inputs, map_step: int = 4, reduce_step: int = 8):
     '''
     task = mapreduce(reducer, mapper, inputs, map_step=4, reduce_step=8)
 
@@ -183,7 +183,7 @@ class block_access(TaskletMixin):
     def can_load(self):
         return all(b.can_load() for b in self.blocks)
 
-def map(mapper, sequence, map_step=4):
+def map(mapper, sequence: typing.Iterable, map_step: int = 4):
     '''
     sequence' = map(mapper, sequence, map_step=4)
 
@@ -224,7 +224,7 @@ def map(mapper, sequence, map_step=4):
         n += len(ss)
     return block_access(blocks, map_step, n)
 
-def currymap(mapper, sequence, map_step=4):
+def currymap(mapper, sequence: typing.Iterable, map_step: int = 4):
     '''
     sequence' = currymap(mapper, sequence, map_step=4)
 
@@ -266,7 +266,7 @@ def currymap(mapper, sequence, map_step=4):
 
 
 
-def reduce(reducer, inputs, reduce_step=8):
+def reduce(reducer, inputs: typing.Iterable, reduce_step: int = 8):
     '''
     task = reduce(reducer, inputs, reduce_step=8)
 
